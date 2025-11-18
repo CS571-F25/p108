@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
-import HomePage from './components/HomePage';
-import ArtistPage from './components/ArtistPage';
+import React from 'react';
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+import HomePage from "./components/pages/HomePage";
+import ArtistPage from "./components/pages/ArtistPage";
+import SupportPage from "./components/pages/SupportPage";
+import BuyPage from "./components/pages/BuyPage";
+import SellPage from "./components/pages/SellPage";
+import LoginPage from "./components/pages/LoginPage";
+import ProfilePage from "./components/pages/ProfilePage";
+import EventPage from "./components/pages/EventPage";
+import CheckoutPage from "./components/pages/CheckoutPage";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedArtistId, setSelectedArtistId] = useState(null);
-
-  const handleArtistClick = (artistId) => {
-    setSelectedArtistId(artistId);
-    setCurrentPage('artist');
-  };
-
-  const handleBackToHome = () => {
-    setCurrentPage('home');
-    setSelectedArtistId(null);
-  };
+  const location = useLocation();
 
   return (
-    <div>
-      {currentPage === 'home' && <HomePage onArtistClick={handleArtistClick} />}
-      {currentPage === 'artist' && <ArtistPage artistId={selectedArtistId} onBack={handleBackToHome} />}
-    </div>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/artist/:id" element={<ArtistPage />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/buy" element={<BuyPage />} />
+        <Route path="/sell" element={<SellPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/artist/:id/event/:eventId" element={<EventPage />} />
+        <Route path="/artist/:id/event/:eventId/ticket/:ticketId" element={<CheckoutPage />} />
+      </Routes>
+    </AnimatePresence>
   );
 }

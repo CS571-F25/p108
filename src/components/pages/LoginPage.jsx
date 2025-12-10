@@ -109,7 +109,6 @@ export default function LoginPage() {
 
   return (
     <PageFade>
-      <NavBar />
 
       <div style={pageStyles.container}>
         <Container className="d-flex justify-content-center">
@@ -167,8 +166,6 @@ export default function LoginPage() {
           </div>
         </Container>
       </div>
-
-      <Footer />
 
       <style>{`
         input:focus, select:focus {

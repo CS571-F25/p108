@@ -14,6 +14,9 @@ const getGlobalStyles = (artistImage) => ({
   navbar: {
   background: "#b0555bff",
   padding: "18px 60px",
+  position: "sticky",
+  top: 0,
+  zIndex: 1000,
   boxShadow: "0 6px 24px rgba(201, 124, 130, 0.12)",
 },
 

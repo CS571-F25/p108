@@ -98,8 +98,6 @@ useEffect(() => {
     <PageFade>
       <div>
 
-        {/* NAVIGATION */}
-        <NavBar />
 
         {/* HERO HEADER */}
         <section style={styles.hero}   aria-hidden="true">
@@ -143,8 +141,6 @@ useEffect(() => {
             </Col>
           </Row>
         </Container>
-
-        <Footer />
       </div>
     </PageFade>
   );

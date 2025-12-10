@@ -132,8 +132,6 @@ export default function SignupPage() {
 
   return (
     <PageFade>
-      <NavBar />
-
       <div style={pageStyles.container}>
         <Container className="d-flex justify-content-center">
           <div style={pageStyles.card}>
@@ -196,8 +194,6 @@ export default function SignupPage() {
           </div>
         </Container>
       </div>
-
-      <Footer />
     </PageFade>
   );
 }

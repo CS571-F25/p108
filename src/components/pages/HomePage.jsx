@@ -40,8 +40,6 @@ export default function HomePage() {
 
   return (
     <PageFade>
-      <NavBar />
-
       {/* â–‘â–‘â–‘ HERO â–‘â–‘â–‘ */}
 <div
   className="text-white text-center d-flex flex-column justify-content-center align-items-center"
@@ -133,8 +131,6 @@ export default function HomePage() {
           </Row>
         </Container>
       </div>
-
-      <Footer />
     </PageFade>
   );
 }

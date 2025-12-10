@@ -262,7 +262,6 @@ export default function SellTicketPage() {
 
   return (
     <PageFade>
-      <NavBar />
 
       <div style={pageStyles.container}>
         <Container>
@@ -481,8 +480,6 @@ export default function SellTicketPage() {
 
         </Container>
       </div>
-
-      <Footer />
 
       <style>{`
         @keyframes spin {

@@ -208,7 +208,6 @@ export default function EventPage() {
 
   return (
     <PageFade>
-      <NavBar />
 
       <Container className="mt-5 mb-5">
         <h1 style={pageHeaderStyle}>Select Your Tickets</h1>
@@ -393,8 +392,6 @@ export default function EventPage() {
           </Row>
         )}
       </Container>
-
-      <Footer />
     </PageFade>
   );
 }

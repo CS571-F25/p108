@@ -260,7 +260,6 @@ export default function CheckoutPage() {
             </div>
           </Container>
         </div>
-        <Footer />
 
         <style>{`
           @keyframes spin {
@@ -277,8 +276,6 @@ export default function CheckoutPage() {
 
   return (
     <PageFade>
-      <NavBar />
-
       <div style={pageStyles.container}>
         <Container>
           <h1 style={pageStyles.pageTitle}>Checkout</h1>

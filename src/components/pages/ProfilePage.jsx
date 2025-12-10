@@ -206,7 +206,6 @@ useEffect(() => {
 
   return (
     <PageFade>
-      <NavBar />
 
       <Container className="mt-5 mb-5">
         <h1 className="mb-4">Your Profile</h1>
@@ -303,8 +302,6 @@ useEffect(() => {
           </Tabs>
         )}
       </Container>
-
-      <Footer />
     </PageFade>
   );
 }

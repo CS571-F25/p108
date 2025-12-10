@@ -5,12 +5,13 @@ import { AnimatePresence } from "framer-motion";
 import HomePage from "./components/pages/HomePage";
 import ArtistPage from "./components/pages/ArtistPage";
 import SupportPage from "./components/pages/SupportPage";
-import BuyPage from "./components/pages/BuyPage";
 import SellPage from "./components/pages/SellPage";
 import LoginPage from "./components/pages/LoginPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import EventPage from "./components/pages/EventPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
+import SignupPage from './components/pages/SignupPage';
+import SeedData from './components/SeedData';  
 
 export default function App() {
   const location = useLocation();
@@ -21,11 +22,14 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/artist/:id" element={<ArtistPage />} />
         <Route path="/support" element={<SupportPage />} />
-        <Route path="/buy" element={<BuyPage />} />
+        <Route path="/buy" element={<HomePage />} />
         <Route path="/sell" element={<SellPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/artist/:id/event/:eventId" element={<EventPage />} />
         <Route path="/artist/:id/event/:eventId/ticket/:ticketId" element={<CheckoutPage />} />
+        <Route path="/checkout/:orderId" element={<CheckoutPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </AnimatePresence>
   );

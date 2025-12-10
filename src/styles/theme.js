@@ -1,16 +1,15 @@
 const theme = {
   colors: {
-    primary: "#c77d7d",
-    accentPink: "#e83e8c",
-    purple: "#7b3fa0",
-    lavender: "#ff59ba",
-    textGray: "#6c757d",
-    borderGray: "#dee2e6",
-    backgroundLight: "#f8f9fa"
+    primary: "#C97C83",       // dusty blush
+    accentPink: "#E83E8C",    // soft pop pink
+    lavender: "#F6E9EE",     // blush background
+    textGray: "#6F7285",
+    borderGray: "#E5E7EB",
+    backgroundLight: "#FBF8FA",
   },
   spacing: {
-    pagePadding: "50px",
-  }
+    pagePadding: "60px",
+  },
 };
 
 export default theme;

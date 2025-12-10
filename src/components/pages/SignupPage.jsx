@@ -5,31 +5,54 @@ import NavBar from "../Navbar";
 import Footer from "../Footer";
 import PageFade from "../PageFade";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../../firebase";
 
-export default function LoginPage() {
+import {
+  setDoc,
+  doc,
+  serverTimestamp
+} from "firebase/firestore";
+
+
+// SignupPage.jsx - Almost identical, just different title and form
+export default function SignupPage() {
   const navigate = useNavigate();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        name,
+        email,
+        createdAt: serverTimestamp()
+      });
+
       navigate("/");
     } catch (err) {
-      console.error("❌ Login failed:", err);
+      console.error("❌ Signup failed:", err);
       alert(err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // Same pageStyles as LoginPage
   const pageStyles = {
     container: {
       background: "linear-gradient(180deg, #FFF5F8 0%, #FFFFFF 100%)",
@@ -114,9 +137,21 @@ export default function LoginPage() {
       <div style={pageStyles.container}>
         <Container className="d-flex justify-content-center">
           <div style={pageStyles.card}>
-            <h1 style={pageStyles.title}>Welcome Back</h1>
+            <h3 style={pageStyles.title}>Create Account</h3>
 
-            <Form onSubmit={handleLogin}>
+            <Form onSubmit={handleSignup}>
+              <Form.Group>
+                <Form.Label style={pageStyles.label}>Full Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  style={pageStyles.input}
+                  placeholder="Jane Smith"
+                />
+              </Form.Group>
+
               <Form.Group>
                 <Form.Label style={pageStyles.label}>Email Address</Form.Label>
                 <Form.Control
@@ -134,49 +169,35 @@ export default function LoginPage() {
                 <Form.Control
                   type="password"
                   required
+                  minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={pageStyles.input}
-                  placeholder="Enter your password"
+                  placeholder="At least 6 characters"
                 />
+                <Form.Text style={{ fontSize: "13px", color: "#999999" }}>
+                  Must be at least 6 characters
+                </Form.Text>
               </Form.Group>
 
               <Button
                 type="submit"
                 style={pageStyles.button(loading)}
                 disabled={loading}
-                onMouseEnter={(e) => {
-                  if (!loading) {
-                    e.target.style.transform = "translateY(-2px)";
-                    e.target.style.boxShadow = "0 8px 32px rgba(201, 124, 130, 0.4)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = "translateY(0)";
-                  e.target.style.boxShadow = "0 6px 24px rgba(201, 124, 130, 0.3)";
-                }}
               >
-                {loading ? "Logging in..." : "Log In"}
+                {loading ? "Creating account..." : "Sign Up"}
               </Button>
             </Form>
 
             <p style={pageStyles.footer}>
-              Don't have an account?{" "}
-              <Link to="/signup" style={pageStyles.link}>Sign up</Link>
+              Already have an account?{" "}
+              <Link to="/login" style={pageStyles.link}>Log in</Link>
             </p>
           </div>
         </Container>
       </div>
 
       <Footer />
-
-      <style>{`
-        input:focus, select:focus {
-          border-color: #E91E63 !important;
-          box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1) !important;
-          outline: none !important;
-        }
-      `}</style>
     </PageFade>
   );
 }

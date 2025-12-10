@@ -1,8 +1,7 @@
-import React from "react";
-import { Card, Row, Col, Badge, Image, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function TicketCard({
-  image,
   section,
   row,
   seats,
@@ -10,60 +9,170 @@ export default function TicketCard({
   rating,
   ratingLabel,
   feature,
-  logo,
   onBuy
 }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isBuyHovered, setIsBuyHovered] = useState(false);
+
+  const cardStyle = {
+    backgroundColor: "white",
+    borderRadius: "20px",
+    padding: "30px",
+    marginBottom: "24px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "30px",
+    boxShadow: isHovered 
+      ? "0 8px 24px rgba(233, 30, 99, 0.15)" 
+      : "0 4px 16px rgba(233, 30, 99, 0.08)",
+    border: isHovered ? "1px solid #F8BBD0" : "1px solid #F0E4E8",
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    transform: isHovered ? "translateY(-4px)" : "translateY(0)"
+  };
+
+  const leftCol = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px"
+  };
+
+  const pillRow = {
+    display: "flex",
+    gap: "10px",
+    flexWrap: "wrap",
+    marginTop: "8px"
+  };
+
+  const ratingStyle = {
+    background: "linear-gradient(135deg, #F8BBD0, #E1BEE7)",
+    color: "#C2185B",
+    fontWeight: "700",
+    fontSize: "13px",
+    padding: "6px 16px",
+    borderRadius: "20px",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    boxShadow: "0 2px 8px rgba(233, 30, 99, 0.15)"
+  };
+
+  const featureStyle = {
+    backgroundColor: "#FFF5F8",
+    color: "#666666",
+    fontWeight: "600",
+    fontSize: "12px",
+    padding: "6px 16px",
+    borderRadius: "20px",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    border: "1px solid #F0E4E8"
+  };
+
+  const sectionTitleStyle = {
+    fontSize: "26px",
+    fontWeight: "700",
+    color: "#2D2D2D",
+    fontFamily: "'Playfair Display', serif",
+    marginBottom: "4px"
+  };
+
+  const locationStyle = {
+    color: "#666666",
+    fontSize: "15px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px"
+  };
+
+  const priceColumn = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    gap: "8px",
+    minWidth: "120px"
+  };
+
+  const priceStyle = {
+    fontSize: "42px",
+    fontWeight: "700",
+    letterSpacing: "-0.02em",
+    color: "#E91E63",
+    lineHeight: 1,
+    fontFamily: "'Playfair Display', serif"
+  };
+
+  const feesStyle = {
+    fontSize: "13px",
+    color: "#666666",
+    fontWeight: "500"
+  };
+
+  const buyBtnStyle = {
+    background: isBuyHovered
+      ? "linear-gradient(135deg, #C2185B, #7B1FA2)"
+      : "linear-gradient(135deg, #E91E63, #9C27B0)",
+    border: "none",
+    borderRadius: "30px",
+    padding: "14px 36px",
+    fontSize: "16px",
+    fontWeight: "600",
+    boxShadow: isBuyHovered
+      ? "0 6px 20px rgba(233, 30, 99, 0.35)"
+      : "0 4px 12px rgba(233, 30, 99, 0.25)",
+    transition: "all 0.3s ease",
+    transform: isBuyHovered ? "translateY(-2px)" : "translateY(0)",
+    whiteSpace: "nowrap"
+  };
+
   return (
-    <Card className="mb-4 shadow-sm border-0 rounded-3 hover-shadow">
-      <Row className="g-0">
+    <div
+      style={cardStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* ========== LEFT INFO ========== */}
+      <div style={leftCol}>
+        <div style={sectionTitleStyle}>
+          {section}
+        </div>
 
-        {/* CONTENT SECTION */}
-        <Col xs={12} md={5} className="p-4 d-flex flex-column justify-content-between">
-          <div>
-            <h2 className="fw-bold mb-2">{section}</h2>
-            <p className="text-muted mb-3">
-              {row}, Seats {seats}
-            </p>
+        <div style={locationStyle}>
+          📍 {row} · Seats {seats}
+        </div>
 
-            {/* Rating + Feature */}
-            <div className="d-flex flex-wrap gap-2">
-              <Badge bg="success" className="py-2 px-3 fs-6 d-flex align-items-center">
-                <span className="fw-bold me-1">{rating}</span>
-                {ratingLabel}
-              </Badge>
+        <div style={pillRow}>
+          <span style={ratingStyle}>
+            ⭐ {rating} {ratingLabel}
+          </span>
 
-              {feature && (
-                <Badge bg="light" text="dark" className="py-2 px-3 fs-6">
-                  🎫 {feature}
-                </Badge>
-              )}
-            </div>
-          </div>
-        </Col>
+          {feature && (
+            <span style={featureStyle}>
+              🎟️ {feature}
+            </span>
+          )}
+        </div>
+      </div>
 
-        {/* PRICE + BUY BUTTON */}
-        <Col 
-          xs={12} 
-          md={3} 
-          className="p-4 d-flex flex-column justify-content-center text-md-end text-start gap-2"
-          style={{ borderLeft: "1px solid #eee" }}
-        >
-          <div>
-            <div className="fs-1 fw-bold">${price}</div>
-            <div className="text-muted small">incl. fees</div>
-          </div>
-        </Col>
-        <Col>
+      {/* ========== PRICE + CTA ========== */}
+      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+        <div style={priceColumn}>
+          <div style={priceStyle}>${price}</div>
+          <div style={feesStyle}>incl. fees</div>
+        </div>
+
         <Button 
-            variant="primary" 
-            className="mt-3 fw-bold px-4 py-2"
-            onClick={onBuy}
-          >
-            Buy Ticket
-          </Button>
-        </Col>
-
-      </Row>
-    </Card>
+          style={buyBtnStyle} 
+          onMouseEnter={() => setIsBuyHovered(true)}
+          onMouseLeave={() => setIsBuyHovered(false)}
+          onClick={onBuy}
+        >
+          Buy Ticket
+        </Button>
+      </div>
+    </div>
   );
 }

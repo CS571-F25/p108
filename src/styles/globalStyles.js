@@ -1,136 +1,100 @@
 import theme from "./theme";
 
 const getGlobalStyles = (artistImage) => ({
+  /* ========== APP WRAPPER ========== */
   appContainer: {
     margin: 0,
     padding: 0,
     minHeight: "100vh",
     boxSizing: "border-box",
+    backgroundColor: "#FBF8FA", // soft blush background
   },
 
+  /* ========== NAVBAR ========== */
   navbar: {
-    backgroundColor: theme.colors.primary,
-    padding: "15px 50px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    boxSizing: "border-box",
-  },
+  background: "#b0555bff",
+  padding: "18px 60px",
+  boxShadow: "0 6px 24px rgba(201, 124, 130, 0.12)",
+},
 
-  logo: {
-    color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
+logo: {
+  fontSize: "24px",
+  fontWeight: "700",
+  color: "#ffffffff",
+  letterSpacing: "0.5px",
+  textDecoration: "none",
+},
 
-  navLinks: {
-    display: "flex",
-    gap: "30px",
-    alignItems: "center",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-  },
+navLink: {
+  fontSize: "14px",
+  fontWeight: "600",
+  color: "#ffffffff",
+  letterSpacing: "0.5px",
+  textDecoration: "none",
+  transition: "all 0.25s ease",
+},
 
-  navLink: {
-    color: "white",
-    textDecoration: "none",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
+profileBtn: {
+  background: "#b0555bff",
+  border: "white",
+  borderRadius: "30px",
+  padding: "10px 28px",
+  fontSize: "14px",
+  letterSpacing: "0.5px",
+  color: "white",
+  boxShadow: "0 6px 24px rgba(201, 124, 130, 0.3)",
+  transition: "all 0.3s ease",
+},
 
-  profileBtn: {
-    backgroundColor: "transparent",
-    color: "white",
-    border: "2px solid white",
-    borderRadius: "20px",
-    padding: "8px 25px",
-    cursor: "pointer",
-    fontSize: "16px",
-  },
+authBtnOutline: {
+  background: "transparent",
+  border: "2px solid #F0E4E8",
+  borderRadius: "30px",
+  padding: "10px 26px",
+  fontSize: "14px",
+  letterSpacing: "0.5px",
+  color: "#C97C83",
+  transition: "all 0.3s ease",
+},
 
-  hero: {
-    backgroundImage: artistImage ? `url(${artistImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "400px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    width: "100%",
-  },
 
-  heroOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-  },
-
-  heroContent: {
-    position: "relative",
-    zIndex: 1,
-    color: "white",
-    textAlign: "center",
-  },
-
-  heroTitle: {
-    fontSize: "56px",
-    fontWeight: "bold",
-    margin: 0,
-  },
-
-  heroSubtitle: {
-    fontSize: "20px",
-    fontWeight: "300",
-    marginTop: "10px",
-  },
-
+  /* ========== SECTION WRAPPERS ========== */
   section: {
-    padding: "60px 50px",
-    backgroundColor: "#f8f9fa",
+    padding: "90px 60px",
     width: "100%",
     boxSizing: "border-box",
   },
 
-  container: {
-    padding: theme.spacing.pagePadding,
-    backgroundColor: theme.colors.backgroundLight,
-    minHeight: "100vh",
-  },
+sectionTitle: {
+  fontSize: "32px",
+  marginBottom: "40px",
+  color: "#2b2b2b",
+},
 
-  sectionTitle: {
-    fontSize: "32px",
-    fontWeight: "bold",
-    marginBottom: "30px",
-    color: "#333",
-  },
 
+  /* ========== ARTIST GRID ========== */
   artistGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "20px",
-    marginTop: "30px",
+    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+    gap: "30px",
+    marginTop: "40px",
+    padding: "1000px"
   },
 
   artistCard: {
     position: "relative",
-    height: "200px",
-    borderRadius: "12px",
+    height: "260px",
+    borderRadius: "26px",
     overflow: "hidden",
     cursor: "pointer",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+    transition: "all 0.4s ease",
+    backgroundColor: "white",
+    boxShadow: "0 18px 40px rgba(0,0,0,0.10)",
   },
 
   artistCardHover: {
-    transform: "translateY(-5px)",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+    transform: "translateY(-6px)",
+    boxShadow: "0 26px 60px rgba(201,124,131,0.28)",
   },
 
   artistImage: {
@@ -144,228 +108,108 @@ const getGlobalStyles = (artistImage) => ({
     bottom: 0,
     left: 0,
     right: 0,
-    padding: "15px",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    padding: "22px",
+    background:
+      "linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.75))",
     color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-
-  featureSection: {
-    padding: "60px 50px",
-    backgroundColor: "white",
-    width: "100%",
-    boxSizing: "border-box",
-  },
-
-  featureGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "40px",
-    marginTop: "40px",
-  },
-
-  featureItem: {
-    display: "flex",
-    gap: "20px",
-    alignItems: "flex-start",
-  },
-
-  featureIcon: {
-    width: "48px",
-    height: "48px",
-    color: "#667eea",
-    flexShrink: 0,
-  },
-
-  featureContent: {
-    flex: 1,
-  },
-
-  featureTitle: {
     fontSize: "20px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-    color: "#333",
+    fontWeight: "800",
+    textAlign: "center",
+    letterSpacing: "0.7px",
   },
 
-  featureText: {
-    fontSize: "14px",
-    color: "#666",
-    lineHeight: "1.6",
-  },
-
-  footer: {
-    backgroundColor: "#2c3e50",
-    color: "white",
-    padding: "50px 50px 20px",
-    width: "100%",
-    boxSizing: "border-box",
-  },
-
-  footerContent: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "40px",
-    marginBottom: "40px",
-  },
-
-  footerColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  footerTitle: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    marginBottom: "15px",
-  },
-
-  footerLinks: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-  },
-
-  footerLink: {
-    color: "#bdc3c7",
-    fontSize: "14px",
-    cursor: "pointer",
-    transition: "color 0.3s",
-    marginBottom: "5px",
-  },
-
-  footerBottom: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: "20px",
-    borderTop: "1px solid #34495e",
-  },
-
-  socialLinks: {
-    display: "flex",
-    gap: "20px",
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-  },
-
-  socialIcon: {
-    width: "24px",
-    height: "24px",
-    fill: "#bdc3c7",
-    cursor: "pointer",
-    transition: "fill 0.3s",
-  },
-
+  /* ========== EVENT CARDS ========== */
   eventCard: {
     backgroundColor: "white",
-    borderRadius: "12px",
-    padding: "25px",
-    marginBottom: "20px",
+    borderRadius: "26px",
+    padding: "36px",
+    marginBottom: "28px",
     display: "flex",
-    gap: "25px",
     alignItems: "center",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-    transition: "box-shadow 0.3s",
+    minHeight: "180px",
+    boxShadow: "0 18px 40px rgba(0,0,0,0.08)",
+    transition: "all 0.35s ease",
   },
 
   eventCardHover: {
-    boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+    transform: "translateY(-4px)",
+    boxShadow: "0 26px 60px rgba(201,124,131,0.28)",
   },
 
   dateBox: {
     textAlign: "center",
-    minWidth: "80px",
+    minWidth: "92px",
+    backgroundColor: "rgba(219, 162, 167, 0.15)",
+    borderRadius: "20px",
+    padding: "16px 10px",
+    height: "120px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   dateMonth: {
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: theme.colors.purple,
-    textTransform: "uppercase",
+    fontSize: "12px",
+    fontWeight: "800",
+    color: "#b0555bff",
+    letterSpacing: "1px",
   },
 
   dateDay: {
-    fontSize: "42px",
-    fontWeight: "bold",
-    color: theme.colors.purple,
+    fontSize: "38px",
+    fontWeight: "900",
+    color: "#b0555bff",
     lineHeight: 1,
   },
 
   dateDayOfWeek: {
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: theme.colors.purple,
-    textTransform: "uppercase",
-  },
-
-  badgeContainer: {
-    marginTop: "5px",
+    fontSize: "12px",
+    fontWeight: "700",
+    color: "#5b5b61ff",
+    letterSpacing: "1px",
   },
 
   badge: {
-    backgroundColor: theme.colors.accentPink,
+    backgroundColor: "#E83E8C",
     color: "white",
-    padding: "4px 12px",
-    borderRadius: "12px",
-    fontSize: "12px",
-    fontWeight: "bold",
+    padding: "6px 16px",
+    borderRadius: "999px",
+    fontSize: "11px",
+    fontWeight: "800",
     display: "inline-block",
   },
 
-  eventDetails: {
-    flex: 1,
-  },
+eventArtist: {
+  fontSize: "20px",
+  fontWeight: "700",
+  marginBottom: "10px",
+  letterSpacing: "-0.01em",
+},
 
-  eventArtist: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginBottom: "8px",
-  },
 
   eventInfo: {
-    fontSize: "16px",
-    color: theme.colors.textGray,
-    marginBottom: "4px",
+    fontSize: "15px",
+    color: "#6F7285",
+    marginBottom: "6px",
   },
 
   ticketsRemaining: {
-    color: theme.colors.accentPink,
+    color: "#E83E8C",
     fontSize: "14px",
-    fontWeight: "bold",
-    marginTop: "8px",
+    fontWeight: "800",
+    marginTop: "10px",
     display: "flex",
     alignItems: "center",
-    gap: "5px",
-  },
-
-  specialNote: {
-    color: theme.colors.textGray,
-    fontSize: "14px",
-    marginTop: "8px",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-  },
-
-  eventActions: {
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
+    gap: "6px",
   },
 
   favoriteBtn: {
-    backgroundColor: "transparent",
-    border: `2px solid ${theme.colors.borderGray}`,
+    backgroundColor: "white",
+    border: "2px solid #EADFE3",
     borderRadius: "50%",
-    width: "45px",
-    height: "45px",
+    width: "48px",
+    height: "48px",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -374,21 +218,97 @@ const getGlobalStyles = (artistImage) => ({
   },
 
   favoriteBtnActive: {
-    backgroundColor: theme.colors.accentPink,
-    borderColor: theme.colors.accentPink,
+    backgroundColor: "#E83E8C",
+    borderColor: "#E83E8C",
+    color: "white",
   },
 
-  seeTicketsBtn: {
-    backgroundColor: "transparent",
-    color: theme.colors.purple,
-    border: `2px solid ${theme.colors.purple}`,
-    borderRadius: "25px",
-    padding: "10px 30px",
-    fontSize: "16px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    transition: "all 0.3s",
-  },
+seeTicketsBtn: {
+  fontSize: "14px",
+  fontWeight: "700",
+  letterSpacing: "0.3px",
+  backgroundColor: "#b0555bff",
+  borderColor: "#b0555bff",
+},
+
+
+/* ========== FOOTER ========== */
+footer: {
+  backgroundColor: "#de7497db",     // soft warm blush
+  color: "#2b2b2b",
+  padding: "90px 60px 36px",
+  width: "100%",
+  boxSizing: "border-box",
+  borderTop: "1px solid rgba(201,124,131,0.25)",  // blush divider
+},
+
+footerContent: {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "56px",                    // more airy
+  marginBottom: "44px",
+},
+
+footerTitle: {
+  fontSize: "12px",
+  fontWeight: "800",
+  textTransform: "uppercase",
+  letterSpacing: "1.6px",
+  marginBottom: "18px",
+  color: "#2b2b2b",
+},
+
+footerLink: {
+  color: "#8A6A6A",               // muted blush-brown (very chic)
+  fontSize: "14px",
+  fontWeight: "500",
+  cursor: "pointer",
+  marginBottom: "12px",
+  transition: "all 0.2s ease",
+},
+
+footerLinkHover: {               // optional for hover
+  color: "#C97C83",
+},
+
+footerBottom: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingTop: "28px",
+  borderTop: "1px solid rgba(201,124,131,0.25)",
+},
+
+
+hero: {
+  backgroundImage: artistImage
+    ? `url(${artistImage})`
+    : "linear-gradient(135deg, #f3c6ce, #f8e8ec)",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  height: "440px",
+  display: "flex",              // ✅
+  alignItems: "center",         // ✅ vertical center
+  justifyContent: "center",     // ✅ horizontal center
+  position: "relative",
+  width: "100%",
+},
+
+
+heroOverlay: {
+  position: "absolute",
+  inset: 0,
+  backgroundColor: "rgba(0,0,0,0.35)",
+  zIndex: 1
+},
+
+heroContent: {
+  position: "relative",
+  zIndex: 2,
+  color: "white",
+  textAlign: "center"
+}
 });
 
 export default getGlobalStyles;
+

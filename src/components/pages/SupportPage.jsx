@@ -10,7 +10,7 @@ export default function SupportPage() {
     <NavBar/>
     <Container className="py-5">
       <h1>Support</h1>
-      <p>This is the Support page. Add FAQs, contact forms, or help docs here.</p>
+      <p>Welcome to the support page. This page is meant to answer questions users might have about our website fanpass. If you need to contact somebody for further advice, we recommend contacting our email, fanpass@gmail.com</p>
     </Container>
     <Footer/>
     </PageFade>

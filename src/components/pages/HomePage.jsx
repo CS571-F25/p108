@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import NavBar from "../Navbar";
 import ArtistCard from "../ArtistCard";
@@ -6,109 +6,135 @@ import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import PageFade from "../PageFade";
 
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase";
 
-export default function HomePage({ onArtistClick }) {
+export default function HomePage() {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [artists, setArtists] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleArtistClick = (artistId) => {
     navigate(`/artist/${artistId}`);
   };
 
-  const artists = [
-    { id: 1, image: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400", name: "Artist 1" },
-    { id: 2, image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400", name: "Artist 2" },
-    { id: 3, color: "#c77d7d", name: "Artist 3" },
-    { id: 4, color: "#4a90a4", name: "Artist 4" },
-    { id: 5, color: "#5a6c7d", name: "Artist 5" },
-    { id: 6, color: "#8b5fb5", name: "Artist 6" },
-    { id: 7, color: "#2d7d52", name: "Artist 7" },
-    { id: 8, color: "#7b3fa0", name: "Artist 8" },
-    { id: 9, color: "#e683b8", name: "Artist 9" },
-  ];
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "artists"));
+        const fetchedArtists = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setArtists(fetchedArtists);
+      } catch (err) {
+        console.error("âŒ Error loading artists:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArtists();
+  }, []);
 
   return (
     <PageFade>
-      {/* NAVBAR */}
       <NavBar />
 
-      {/* HERO */}
-      <div className="text-white text-center d-flex flex-column justify-content-center align-items-center"
-           style={{
-             height: "450px",
-             backgroundImage: "url('https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=1200')",
-             backgroundSize: "cover",
-             backgroundPosition: "center",
-             position: "relative"
-           }}>
-        <div className="position-absolute top-0 start-0 end-0 bottom-0"
-             style={{ backgroundColor: "rgba(0,0,0,0.4)" }} />
-        <div className="position-relative">
-          <h1 className="display-3 fw-bold">Fan Pass</h1>
-          <p className="fs-5">Ticket resell site from fans, for fans</p>
-        </div>
+      {/* â–‘â–‘â–‘ HERO â–‘â–‘â–‘ */}
+<div
+  className="text-white text-center d-flex flex-column justify-content-center align-items-center"
+  style={{
+    height: "420px",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  {/* ✅ ACCESSIBLE HERO IMAGE */}
+  <img
+    src="https://i.pinimg.com/1200x/e8/68/ab/e868ab4129c0999d3294b913555c9418.jpg"
+    alt="Concert crowd at night with stage lights"
+    style={{
+      position: "absolute",
+      inset: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      zIndex: 0,
+    }}
+  />
+
+  {/* ✅ DARK OVERLAY */}
+  <div
+    className="position-absolute top-0 start-0 end-0 bottom-0"
+    style={{ backgroundColor: "rgba(0,0,0,0.45)", zIndex: 1 }}
+  />
+
+  {/* ✅ TEXT CONTENT */}
+  <div className="position-relative" style={{ zIndex: 2 }}>
+    <h1 className="display-3 fw-bold mb-3">FanPass</h1>
+    <p className="fs-5 opacity-75">
+      A fan-first ticket marketplace built for fair resale.
+    </p>
+  </div>
+</div>
+
+
+      {/* â–‘â–‘â–‘ ARTIST GRID â–‘â–‘â–‘ */}
+      <Container className="py-5">
+        <h2 className="fw-bold mb-4">Your Artists</h2>
+
+        {loading ? (
+          <p className="text-center py-5">Loading artistsâ€¦</p>
+        ) : artists.length === 0 ? (
+          <p className="text-center py-5">No artists available.</p>
+        ) : (
+          <Row xs={1} sm={2} md={2} lg={3} className="g-4">
+            {artists.map((artist) => (
+              <Col key={artist.id}>
+                <ArtistCard
+                  artist={artist}
+                  hovered={hoveredCard === artist.id}
+                  onHoverStart={() => setHoveredCard(artist.id)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  onClick={() => handleArtistClick(artist.id)}
+                />
+              </Col>
+            ))}
+          </Row>
+        )}
+      </Container>
+
+      {/* â–‘â–‘â–‘ FEATURE STRIP â–‘â–‘â–‘ */}
+      <div style={{ backgroundColor: "#FBF8FA" }}>
+        <Container className="py-5">
+          <h2 className="fw-bold mb-4 text-center">Why FanPass?</h2>
+
+          <Row className="g-4">
+            <Col md={6}>
+              <div className="p-4 h-100 bg-white rounded shadow-sm">
+                <h3 className="fw-bold mb-2">Fast & Secure</h3>
+                <p className="mb-0 text-muted">
+                  Buy and sell tickets with real-time protection and verified
+                  sellers.
+                </p>
+              </div>
+            </Col>
+
+            <Col md={6}>
+              <div className="p-4 h-100 bg-white rounded shadow-sm">
+                <h3 className="fw-bold mb-2">Smart Pricing</h3>
+                <p className="mb-0 text-muted">
+                  Fair resale pricing â€” no outrageous markups.
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
 
-      {/* ARTIST GRID SECTION */}
-      <Container className="py-5">
-        <h2 className="fw-bold mb-4">Your Artists.</h2>
-
-        <Row xs={1} sm={2} md={2} lg={3} className="g-4">
-          {artists.map((artist) => (
-            <Col key={artist.id}>
-              <ArtistCard
-                artist={artist}
-                hovered={hoveredCard === artist.id}
-                onHoverStart={() => setHoveredCard(artist.id)}
-                onHoverEnd={() => setHoveredCard(null)}
-                onClick={() => handleArtistClick(artist.id)}
-              />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-
-      {/* FEATURE SECTION */}
-      <Container className="py-5 bg-light">
-        <h2 className="fw-bold mb-4">Why Fan Pass?</h2>
-
-        <Row className="g-4">
-
-          {/* Feature 1 */}
-          <Col md={6}>
-            <div className="d-flex gap-3">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                <path d="M12 6v6l4 2" strokeWidth="2" />
-              </svg>
-              <div>
-                <h4 className="fw-bold">Fast & Secure</h4>
-                <p>Buy and sell tickets with confidence.</p>
-              </div>
-            </div>
-          </Col>
-
-          {/* Feature 2 */}
-          <Col md={6}>
-            <div className="d-flex gap-3">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <rect x="3" y="4" width="18" height="18" rx="2" strokeWidth="2" />
-                <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2" />
-                <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2" />
-                <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2" />
-              </svg>
-              <div>
-                <h4 className="fw-bold">Smart Pricing</h4>
-                <p>Fair resale prices. No outrageous markups.</p>
-              </div>
-            </div>
-          </Col>
-
-        </Row>
-      </Container>
-
-      {/* FOOTER */}
-      <Footer/>
+      <Footer />
     </PageFade>
   );
 }

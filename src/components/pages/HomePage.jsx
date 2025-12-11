@@ -124,7 +124,7 @@ export default function HomePage() {
               <div className="p-4 h-100 bg-white rounded shadow-sm">
                 <h3 className="fw-bold mb-2">Smart Pricing</h3>
                 <p className="mb-0 text-muted">
-                  Fair resale pricing â€” no outrageous markups.
+                  Fair resale pricing no outrageous markups.
                 </p>
               </div>
             </Col>
